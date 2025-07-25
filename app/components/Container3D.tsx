@@ -302,9 +302,9 @@ export default function Container3D() {
             )}
             </div>
         )}
-            {!showSettings && (
-                <button onClick={() => setShowSettings(true)} style={{ position: 'absolute', top: 20, left: 20, background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '10px 15px', zIndex: 10 }}>เปิดตั้งค่า</button>
-            )}
+        {!showSettings && (
+            <button onClick={() => setShowSettings(true)} style={{ position: 'absolute', top: 20, left: 20, background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '10px 15px', zIndex: 10 }}>เปิดตั้งค่า</button>
+        )}
 
       <Canvas>
         <ambientLight intensity={0.6} />
