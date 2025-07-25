@@ -94,6 +94,7 @@ export default function Container3D() {
   const [newParcel, setNewParcel] = useState({ name: '', w: 0.5, h: 0.5, d: 0.5 });
   const [unplacedParcels, setUnplacedParcels] = useState<{ size: [number, number, number] }[]>([]);
   const [summary, setSummary] = useState<PlacementSummary | null>(null);
+  const [showSettings, setShowSettings] = useState(true);
 
   useEffect(() => {
     if (unplacedParcels.length > 0) {
@@ -247,11 +248,13 @@ export default function Container3D() {
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-        <div style={{ position: 'absolute', top: 20, left: 20, background: 'rgba(255, 255, 255, 0.9)', padding: '15px', borderRadius: '10px', zIndex: 10, width: '320px', maxHeight: 'calc(100vh - 40px)', overflowY: 'auto' }}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-              <h3>ตั้งค่า</h3>
-              <button onClick={handleResetAll} style={{ background: '#6c757d', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '5px 10px' }}>รีเซ็ตทั้งหมด</button>
-            </div>
+        {showSettings && (
+            <div style={{ position: 'absolute', top: 20, left: 20, background: 'rgba(255, 255, 255, 0.9)', padding: '15px', borderRadius: '10px', zIndex: 10, width: '320px', maxHeight: 'calc(100vh - 40px)', overflowY: 'auto' }}>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                  <h3>ตั้งค่า</h3>
+                  <button onClick={() => setShowSettings(false)} style={{ background: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '5px 10px' }}>ปิด</button>
+                  <button onClick={handleResetAll} style={{ background: '#6c757d', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '5px 10px' }}>รีเซ็ตทั้งหมด</button>
+                </div>
             <hr style={{ margin: '10px 0', border: 'none', borderTop: '1px solid #ccc' }} />
             <h4>ขนาดตู้คอนเทนเนอร์ (เมตร)</h4>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
@@ -297,7 +300,11 @@ export default function Container3D() {
                     </ul>
                 </div>
             )}
-        </div>
+            </div>
+        )}
+            {!showSettings && (
+                <button onClick={() => setShowSettings(true)} style={{ position: 'absolute', top: 20, left: 20, background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '10px 15px', zIndex: 10 }}>เปิดตั้งค่า</button>
+            )}
 
       <Canvas>
         <ambientLight intensity={0.6} />
